@@ -1,0 +1,8 @@
+#finalVideo {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+#finalVideo.show {
+  opacity: 1;
+}
