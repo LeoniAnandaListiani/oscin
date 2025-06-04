@@ -1,1 +1,236 @@
-Hallo
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>🎉 Selamat Ulang Tahun Bestie </title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fffde7, #ffe0b2);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #ff4081;
+      margin-top: 30px;
+      font-size: 2.5em;
+    }
+
+    .next-button {
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .gift-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gift-box {
+      width: 200px;
+      height: 200px;
+      background-color: #f06292;
+      border-radius: 15px;
+      margin: 20px auto;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background-color 0.5s ease, transform 0.3s ease;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.05);
+    }
+
+    .gift-box::before,
+    .gift-box::after {
+      content: "";
+      position: absolute;
+      background-color: #fff;
+      z-index: 1;
+    }
+
+    .gift-box::before {
+      width: 20px;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift-box::after {
+      height: 20px;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .ribbon {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 40px;
+      background-color: #ff4081;
+      border-radius: 10px;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 1.1em;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 40px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .photo {
+      margin-top: 10px;
+      max-width: 300px;
+      max-height: 300px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: none;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .final-message {
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #6a1b9a;
+      display: none;
+      padding: 20px;
+      animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+      border-right: .15em solid #6a1b9a;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #6a1b9a; }
+    }
+
+    video {
+      margin: 20px auto;
+      max-width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎈 Selamat Ulang Tahun!</h1>
+  <p>💖Semoga di hari ulang tahun yang ke 21 ini diberi kedewasaan, rezeki, dan pacar yang banyak 💖</p>
+  <button class="next-button" onclick="startSurprise()">Next 🏱</button>
+
+  <div class="gift-container" id="giftSection">
+    <div class="gift-box" onclick="openLayer()">
+      <div class="ribbon">Klik di sini 🎀</div>
+    </div>
+    <div class="message" id="messageBox"></div>
+    <img id="photoBox" class="photo" src="" alt="Foto kenangan">
+    <div class="final-message" id="finalMessage">✨ UDAH ITU AJA CAPE BUAT CODINGNYA BAYYY BAYY EH SEBELUM DI TUTUP TONTON VIDEO DI BAWAH DULU YA! 🎊</div>
+    <video id="finalVideo" controls src="video1.mp4" style="display: none;"></video>
+  </div>
+
+  <audio id="birthdayMusic" autoplay loop>
+    <source src="happy-birthday.mp3.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <script>
+    const messages = [
+      "🎉 hmm mau nulis apa ya...pertama aku berdoa semoga ga insecure lagi dan jadi anak yang selalu berbakti sama orang tua!",
+      "💖 jangan setres dulu masih banyak mie ayam enak yang belum kita coba dan masih banyak hal  yang harus kamu ributin sama pacarmmu soooo semangatt best!",
+      "📸 kalo ditanya kenapa akhir akhir ini selalu minta foto kamu karena sebenrnya aku mau cetak polaroid tapi ga kekumpul potonya cuma dikit huh JADI KU BUATIN INI SEBAGAI MAHASISWA TEKNOLOGI YANG PINTAR HAHAHHAAHAAAHAH~",
+      "🎂 Tambah umur, tambah dewasa, tambah keren, tambah kaya, tambah duit, tambah koleksi emasnya,tambah berliannya tambah semua muanya !",
+      "🌟 Harapan tahun ini apa? oke aku aamiinkan, tapi ga gratis kalo bisa si traktir richis😆!",
+      "👑 sebenernya jujur aja aku udah bingung mau ngomong apalagi tapi semoga dompetmu ga kering aja udah bisa buat kamu bahagia jadi aku doain dombet mu dan mbanking selalu tebel aamiin !",
+      "😆 PLISS JANGAN BILANG KAMU KAYA BUNTELAN KENTUK LAGI MUAKK DENGERNYAA!",
+      "💌 BELAJAR SANTAI GA SEMUA HARUS BURU-BURU JADI CALM BEST ORANG LIAT KAMU CALM SEMAKIN KAGUM JADI GA USAH GUPEK PLISS INI EMANG ROASTING BUT KAMU TERLALU GUPEK WOIII SOOO SEKARANG BELAJAR JANGAN BURU-BURU CHILL AJA !",
+      "🍰 ini yang oenting JANGAN LUPA TRAKTIRANNYA WAJASAJHSYAFSYASJAGSYWTSJSG!",
+      "✨ dan buang rasa ga enakan itu walaupun dia sahabat kamu atau keluarga kamu sekaligus yang itu merugikan diri kamu belajar pelan-pelan karena itu jadi boomerang kamu di kemudian hari, udah ituaja terakhir SELAMAT HARI BROJOL CUYYYY!"
+    ];
+
+    const photos = [
+      "foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg",
+      "foto6.jpg", "foto7.jpg", "foto8.jpg", "foto9.jpg", "foto10.jpg"
+    ];
+
+    const colors = [
+      "#f06292", "#ba68c8", "#64b5f6", "#4db6ac", "#ffd54f",
+      "#a1887f", "#90a4ae", "#ff8a65", "#81c784", "#e57373"
+    ];
+
+    let index = 0;
+
+    function startSurprise() {
+      document.querySelector(".next-button").style.display = "none";
+      document.getElementById("giftSection").style.display = "flex";
+      const music = document.getElementById("birthdayMusic");
+      if (music) music.play().catch(() => {});
+    }
+
+    function openLayer() {
+      const msgBox = document.getElementById("messageBox");
+      const photoBox = document.getElementById("photoBox");
+      const finalMsg = document.getElementById("finalMessage");
+      const finalVideo = document.getElementById("finalVideo");
+      const giftBox = document.querySelector(".gift-box");
+
+      if (index < 10) {
+        msgBox.innerHTML = `<strong>Lapisan ${index + 1}:</strong> ${messages[index]}`;
+        msgBox.style.display = "block";
+
+        photoBox.src = photos[index];
+        photoBox.style.display = "block";
+
+        giftBox.style.backgroundColor = colors[index];
+
+        index++;
+      } else {
+        msgBox.style.display = "none";
+        photoBox.style.display = "none";
+        finalMsg.style.display = "block";
+        giftBox.style.display = "none";
+
+        // Tampilkan video
+        finalVideo.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
